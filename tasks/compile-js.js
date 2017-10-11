@@ -3,7 +3,7 @@ taskFn.alias = [];
 
 module.exports = taskFn;
 
-function taskFn() {
+function taskFn(callback) {
     const includePathOptions = {
         paths: ['src']
     };
@@ -20,6 +20,7 @@ function taskFn() {
         buffer,
         util,
         rev,
+        uglify,
         gulpOptions
     ] = [
         'gulp',
@@ -34,6 +35,7 @@ function taskFn() {
         'vinyl-buffer',
         'gulp-util',
         'gulp-rev',
+        "gulp-uglify",
         './snippets/gulp-options.json'
     ].map(require);
 
@@ -54,13 +56,23 @@ function taskFn() {
             rollupIncludePaths(includePathOptions)
         ]
     };
+    
     return rollup(rollupOptions)
         .pipe(source('src/app/index.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(babel({ presets: [['es2015', { modules: false }]], babelrc: false }))
+        .pipe(babel({ 
+            presets: [['env', { 
+                // "targets": {
+                //     ie: 8
+                // }
+                "browsers": "last 4 versions"
+            }]],
+            babelrc: false 
+        }))
         .on('error', util.log)
         .pipe(rename('index.js'))
+        .pipe(uglify())
         .pipe(rev())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(gulpOptions.dest))
