@@ -19,6 +19,6 @@ function taskFn(){
         .pipe(sourcemaps.write("."))
         .on('error', util.log)
         .pipe(gulp.dest(options.dest))
-        .pipe(require("./snippets/rev-manifest"))
+        .pipe(require("./snippets/rev-manifest")())
         .pipe(gulp.dest(options.dest));
 }

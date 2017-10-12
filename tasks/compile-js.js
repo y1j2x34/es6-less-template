@@ -76,6 +76,6 @@ function taskFn(callback) {
         .pipe(rev())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(gulpOptions.dest))
-        .pipe(require('./snippets/rev-manifest'))
+        .pipe(require('./snippets/rev-manifest')())
         .pipe(gulp.dest(gulpOptions.dest));
 }

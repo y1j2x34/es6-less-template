@@ -1,5 +1,8 @@
-var rev = require("gulp-rev");
-module.exports = rev.manifest('dist/rev-manifest.json', {
-    base: process.cwd() + '/dist',
-    merge: true
-});
+const rev = require('gulp-rev');
+const options = require("./gulp-options.json");
+module.exports = function() {
+    return rev.manifest(options.manifestPath, {
+        base: process.cwd() + '/dist',
+        merge: true
+    });
+};

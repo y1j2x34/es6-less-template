@@ -5,7 +5,7 @@ module.exports = function(){
         const options = require('./gulp-options.json');
         return gulp
             .src(options.indexHtmlPath)
-            .pipe(revReplace({ manifest: gulp.src(options.manifest) }))
+            .pipe(revReplace({ manifest: gulp.src(options.manifestPath) }))
             .pipe(gulp.dest(options.dest));
     }
 }

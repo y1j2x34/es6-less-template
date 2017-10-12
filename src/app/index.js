@@ -1,22 +1,7 @@
-import {
-    Dispatcher
-} from "flux";
-import {
-    ReduceStore
-} from "flux/utils";
+import CounterView from "./CounterView";
+var incrementBtn = document.getElementById("increment");
+var decrementBtn = document.getElementById("decrement");
+var displayer = document.getElementById("displayer");
 
-class CounterStore extends ReduceStore {
-    getInitialState() {
-        return 0;
-    }
-    reduce(state, action) {
-        switch (action.type) {
-            case "increment":
-                return state + 1;
-            case "square":
-                return state * state;
-            default:
-                return state;
-        }
-    }
-}
+const view = new CounterView(incrementBtn, decrementBtn, displayer);
+view.init();

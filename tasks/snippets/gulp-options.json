@@ -3,5 +3,5 @@
     "lessSrcPath":"./src/style/app.less",
     "indexHtmlPath": "src/index.html",
     "dest": "./dist",
-    "manifest": "dist/rev-manifest.json"
+    "manifestPath": "dist/rev-manifest.json"
 }
