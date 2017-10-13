@@ -14,6 +14,8 @@ function taskFn(callback) {
         rollupIncludePaths,
         rollupNodeResolve,
         rollupCommonjs,
+        cached,
+        remember,
         sourcemaps,
         rename,
         source,
@@ -29,6 +31,8 @@ function taskFn(callback) {
         'rollup-plugin-includepaths',
         'rollup-plugin-node-resolve',
         'rollup-plugin-commonjs',
+        "gulp-cached",
+        "gulp-remember",
         'gulp-sourcemaps',
         'gulp-rename',
         'vinyl-source-stream',
@@ -59,6 +63,7 @@ function taskFn(callback) {
     
     return rollup(rollupOptions)
         .pipe(source('src/app/index.js'))
+        .pipe(cached("scripts"))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(babel({ 
@@ -66,13 +71,14 @@ function taskFn(callback) {
                 // "targets": {
                 //     ie: 8
                 // }
-                "browsers": "last 4 versions"
+                "browsers": "last 2 versions"
             }]],
             babelrc: false 
         }))
         .on('error', util.log)
-        .pipe(rename('index.js'))
         .pipe(uglify())
+        .pipe(remember("scripts"))
+        .pipe(rename('index.js'))
         .pipe(rev())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(gulpOptions.dest))
