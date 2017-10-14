@@ -5,3 +5,4 @@ var displayer = document.getElementById("displayer");
 
 const view = new CounterView(incrementBtn, decrementBtn, displayer);
 view.init();
+console.info("hello world");

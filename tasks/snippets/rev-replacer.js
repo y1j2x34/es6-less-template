@@ -1,11 +1,13 @@
 module.exports = function(){
     return function taskFn(){
         const gulp = require('gulp');
+        const path = require("path");
         const revReplace = require('gulp-rev-replace');
-        const options = require('./gulp-options.json');
+        const ENV_OPTIONS = require("./env");
+
         return gulp
-            .src(options.indexHtmlPath)
-            .pipe(revReplace({ manifest: gulp.src(options.manifestPath) }))
-            .pipe(gulp.dest(options.dest));
+            .src("src/index.html")
+            .pipe(revReplace({ manifest: gulp.src(path.join(ENV_OPTIONS.DEST_FOLDER, 'rev-manifest.json')) }))
+            .pipe(gulp.dest(ENV_OPTIONS.DEST_FOLDER));
     }
 }

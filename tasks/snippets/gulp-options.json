@@ -1,7 +1,0 @@
-{
-    "mainJSPath": "./src/app/index.js",
-    "lessSrcPath":"./src/style/app.less",
-    "indexHtmlPath": "src/index.html",
-    "dest": "./dist",
-    "manifestPath": "dist/rev-manifest.json"
-}
