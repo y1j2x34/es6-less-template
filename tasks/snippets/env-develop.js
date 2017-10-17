@@ -6,6 +6,7 @@ module.exports = function(options){
         DEST_FOLDER: destFolder,
         STRIP: false,
         SOURCE_MAP: true,
+        UGLIFY: false,
         BUILD_TASK_FACTORY: function(){
             return function() {
                 const gulp = require('gulp');

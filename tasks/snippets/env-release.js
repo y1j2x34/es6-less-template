@@ -23,6 +23,7 @@ module.exports = function(options){
         SOURCE_MAP: false,
         REV: true,
         STRIP: true,
+        UGLIFY: true,
         ROLLUP_STRIP_OPTIONS: {
             debugger: true,
             functions: [

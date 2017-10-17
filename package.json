@@ -15,7 +15,7 @@
     "url": "git@github.com:y1j2x34/es6-less-template.git"
   },
   "bugs": {
-    "email": "y1j2x345@qq.com",
+    "email": "y1j2x34@qq.com",
     "url": "https://github.com/y1j2x34/es6-less-template/issues"
   },
   "license": "MIT",
@@ -26,10 +26,12 @@
     "argv": "0.0.2",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-cached": "^1.1.1",
     "gulp-clean": "^0.3.2",
+    "gulp-clean-css": "^3.9.0",
     "gulp-filter": "^5.0.1",
     "gulp-hash-filename": "^1.2.0",
     "gulp-less": "^3.3.2",
@@ -41,6 +43,7 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
+    "less-plugin-autoprefix": "^1.5.1",
     "react": "^15.0.1",
     "require-dir": "^0.3.2",
     "rollup-plugin-commonjs": "^8.2.1",

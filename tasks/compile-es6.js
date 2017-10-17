@@ -60,9 +60,12 @@ function taskFn(callback) {
                 babelrc: false
             })
         )
-        .on('error', util.log)
-        .pipe(uglify())
-        .pipe(remember('scripts'))
+        .on('error', util.log);
+    if(ENV_OPTIONS.UGLIFY){
+        stream = stram.pipe(uglify());
+    }
+
+    stream = stream.pipe(remember('scripts'))
         .pipe(rename('index.js'));
     if (ENV_OPTIONS.REV) {
         stream = stream.pipe(rev());
