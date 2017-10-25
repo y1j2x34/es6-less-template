@@ -85,7 +85,10 @@ argv.mod({
 });
 
 const args = argv.run();
+
 const options = args.options;
+
+options.mod = args.mod;
 
 if (options.help === "true") {
     

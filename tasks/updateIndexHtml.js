@@ -1,3 +1,1 @@
-const taskFn = require("./snippets/rev-replacer")();
-
-module.exports = taskFn;
+exports.task = require("./snippets/rev-replacer")();

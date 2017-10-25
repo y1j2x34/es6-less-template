@@ -7,6 +7,7 @@ module.exports = function(options){
         STRIP: false,
         SOURCE_MAP: true,
         UGLIFY: false,
+        WATCH_MOD: options.mod === "watch",
         BUILD_TASK_FACTORY: function(){
             return function() {
                 const gulp = require('gulp');

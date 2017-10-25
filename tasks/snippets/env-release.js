@@ -24,6 +24,7 @@ module.exports = function(options){
         REV: true,
         STRIP: true,
         UGLIFY: true,
+        WATCH_MOD: false,
         ROLLUP_STRIP_OPTIONS: {
             debugger: true,
             functions: [

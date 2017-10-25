@@ -1,5 +1,8 @@
-const ENV_OPTIONS = require('./snippets/env');
-const taskFn = ENV_OPTIONS.BUILD_TASK_FACTORY();
-taskFn.deps = ["compile-es6"];
+exports.deps = ["compile-es6"];
 
-module.exports = taskFn;
+const ENV_OPTIONS = require('./snippets/env');
+if (ENV_OPTIONS.REV) {
+    exports.task = ENV_OPTIONS.BUILD_TASK_FACTORY();
+} else {
+    exports.task = function() {};
+}

@@ -6,27 +6,23 @@ if(!target || target.length < 1){
     target = ["all"];
 }
 
-const ENV_OPTIONS = require('./snippets/env');
-const taskFn = ENV_OPTIONS.BUILD_TASK_FACTORY();
+const deps = [];
 
+const ENV_OPTIONS = require('./snippets/env');
 const buildAll = contains(target, "all");
 const buildLess = buildAll || contains(target, 'style') || contains(target, 'less');
 const buildJs = buildAll || contains(target, 'js') || contains(target, 'script');
 
-function contains(array, value){
-    return array.indexOf(value) !== -1;
-}
-
-const deps = [];
-
 if(buildLess){
     deps.push("compile-less");
 }
-
 if(buildJs){
     deps.push("compile-es6");
 }
 
-taskFn.deps = deps;
+exports.deps = deps;
+exports.task = ENV_OPTIONS.BUILD_TASK_FACTORY();
 
-module.exports = taskFn;
+function contains(array, value){
+    return array.indexOf(value) !== -1;
+}

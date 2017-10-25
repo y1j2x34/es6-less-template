@@ -1,4 +1,4 @@
-module.exports = function(){
+exports.task = () => {
     require("./snippets/args");
     const argv = require("argv");
 

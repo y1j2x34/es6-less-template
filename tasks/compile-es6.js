@@ -1,9 +1,6 @@
-taskFn.deps = ['clean-js'];
-taskFn.alias = [];
+exports.deps = ['clean-js'];
 
-module.exports = taskFn;
-
-function taskFn(callback) {
+exports.task = callback => {
     const ENV_OPTIONS = require('./snippets/env');
 
     const [
@@ -34,12 +31,15 @@ function taskFn(callback) {
         'gulp-uglify'
     ].map(require);
 
+    const browserSync = require('browser-sync').create();
+
     const rollupOptions = buildRollupOptions(ENV_OPTIONS);
 
     let stream = rollup(rollupOptions)
         .pipe(source(rollupOptions.input))
         .pipe(cached('scripts'))
         .pipe(buffer());
+
     if (ENV_OPTIONS.SOURCE_MAP) {
         stream = stream.pipe(sourcemaps.init({ loadMaps: true }));
     }
@@ -61,12 +61,13 @@ function taskFn(callback) {
             })
         )
         .on('error', util.log);
-    if(ENV_OPTIONS.UGLIFY){
+
+    if (ENV_OPTIONS.UGLIFY) {
         stream = stram.pipe(uglify());
     }
 
-    stream = stream.pipe(remember('scripts'))
-        .pipe(rename('index.js'));
+    stream = stream.pipe(remember('scripts')).pipe(rename('index.js'));
+
     if (ENV_OPTIONS.REV) {
         stream = stream.pipe(rev());
     }
@@ -79,8 +80,13 @@ function taskFn(callback) {
             .pipe(require('./snippets/rev-manifest')()) //
             .pipe(gulp.dest(ENV_OPTIONS.DEST_FOLDER)); //
     }
+
+    if (ENV_OPTIONS.WATCH_MOD) {
+        stream = stream.pipe(browserSync.stream({ match: '**/*.js' }));
+    }
+
     return stream;
-}
+};
 function buildRollupOptions(ENV_OPTIONS) {
     const includePathOptions = { paths: ['src'] };
     const [

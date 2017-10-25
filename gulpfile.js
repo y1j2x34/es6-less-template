@@ -1,20 +1,17 @@
-const gulp = require("gulp");
-const requireDir = require("require-dir");
+const gulp = require('gulp');
+const requireDir = require('require-dir');
 
-const tasks = requireDir("./tasks");
+const taskModules = requireDir('./tasks');
 
-registerTasks(tasks);
+registerTasks(taskModules);
 
-function registerTasks(tasks){
-    for (var name in tasks) {
-        var taskFn = tasks[name];
-
-        if (taskFn instanceof Function) {
-            gulp.task(name, taskFn.deps || [], taskFn);
-            var alias = taskFn.alias;
-            if (alias) {
-                alias.forEach(aliaName => gulp.task(aliaName, taskFn.deps || [], taskFn)); // jshint ignore: line
-            }
-        }
-    }
+function registerTasks(taskModules) {
+    Object.entries(taskModules) //
+        .filter(([, { task }]) => task instanceof Function) //
+        .forEach(([name, { deps, alias, task }]) => {
+            deps = deps || [];
+            alias = alias || [];
+            alias.unshift(name);
+            alias.forEach(aliaName => gulp.task(aliaName, deps, task));
+        });
 }

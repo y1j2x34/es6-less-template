@@ -1,7 +1,5 @@
-module.exports = taskFn;
-taskFn.deps = ["clean-css"];
-
-function taskFn(){
+exports.deps = ["clean-css"];
+exports.task = () => {
     const ENV_OPTIONS = require("./snippets/env");
     const gulp = require("gulp");
     const less = require("gulp-less");
@@ -34,10 +32,10 @@ function taskFn(){
     }
 
     if(ENV_OPTIONS.SOURCE_MAP){
-        stream = stream.pipe(sourcemaps.write("."))
+        stream = stream.pipe(sourcemaps.write("."));
     }
 
-    stream = stream.on('error', util.log).pipe(gulp.dest(ENV_OPTIONS.DEST_FOLDER))
+    stream = stream.on('error', util.log).pipe(gulp.dest(ENV_OPTIONS.DEST_FOLDER));
 
     if(ENV_OPTIONS.REV){
         stream = stream.pipe(require('./snippets/rev-manifest')()).pipe(gulp.dest(ENV_OPTIONS.DEST_FOLDER));
