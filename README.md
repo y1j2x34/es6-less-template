@@ -69,7 +69,7 @@ npm run help
 
 The build task will compile your ES6 code into ES5 , less into css and then concatenate them into a single file separately. 
 Development builds will also generate sourcemaps and copy results into dist/.
-Production builds will only compile and concatenate source code without generating sourcemap and minify results, dest copy results into /release/{version}/.
+Production builds will only compile and concatenate source code without generating sourcemap and minify results.
 
 ## License
 
