@@ -16,6 +16,6 @@ export default new class CounterActions{
         dispatcher.dispatch({
             type: ActionTypes.UPDATE,
             number: newNumber
-        })
+        });
     }
 };
